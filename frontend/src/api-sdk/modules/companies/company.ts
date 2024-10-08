@@ -1,0 +1,35 @@
+export interface Company {
+    id: number;
+    ticker: string;
+    rank: number;
+    name: string;
+    sectorId: number;
+    industryId: number;
+    companyTypeId: number;
+    founderIsCeo: boolean;
+    femaleCeo: boolean;
+    growthInJobs: boolean;
+    changeInRank: number;
+    gainedInRank: boolean;
+    droppedInRank: boolean;
+    newcomerToTheFortune500: boolean;
+    global500: boolean;
+    worldsMostAdmiredCompanies: boolean;
+    bestCompaniesToWorkFor: boolean;
+    numberOfEmployees: number;
+    marketCapMarch28M: number;
+    revenuesM: number;
+    revenuePercentChange: number;
+    profitable: boolean;
+    profitsM: number;
+    profitsPercentChange: number;
+    assetsM: number;
+    ceo: string;
+    country: string;
+    headquartersCity: string;
+    headquartersState: string;
+    website: string;
+    footnote: string;
+    marketCapUpdatedM: number;
+    updated: string;
+}

@@ -1,0 +1,66 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Company {
+  id                            Int      @id @default(autoincrement())
+  ticker                        String
+  rank                          Int
+  name                          String
+  sectorId                      Int
+  industryId                    Int
+  companyTypeId                 Int
+  profitable                    Boolean  // Changed from String to Boolean
+  founderIsCeo                 Boolean  @map("Founder_is_CEO") // Changed from String to Boolean
+  femaleCeo                     Boolean  @map("FemaleCEO") // Changed from String to Boolean
+  growthInJobs                  Boolean  @map("Growth_in_Jobs") // Changed from String to Boolean
+  changeInRank                  Float    @map("Change_in_Rank")
+  gainedInRank                  Boolean  @map("Gained_in_Rank") // Changed from String to Boolean
+  droppedInRank                 Boolean  @map("Dropped_in_Rank") // Changed from String to Boolean
+  newcomerToTheFortune500      Boolean  @map("Newcomer_to_the_Fortune500") // Changed from String to Boolean
+  global500                     Boolean  @map("Global500") // Changed from String to Boolean
+  worldsMostAdmiredCompanies   Boolean  @map("Worlds_Most_Admired_Companies") // Changed from String to Boolean
+  bestCompaniesToWorkFor       Boolean  @map("Best_Companies_to_Work_For") // Changed from String to Boolean
+  numberOfEmployees             Int      @map("Number_of_employees")
+  marketCapMarch28M            Float?   @map("MarketCap_March28_M")
+  revenuesM                     Float    @map("Revenues_M")
+  revenuePercentChange          Float?   @map("RevenuePercentChange")
+  profitsM                      Float?   @map("Profits_M")
+  profitsPercentChange          Float?   @map("ProfitsPercentChange")
+  assetsM                       Float    @map("Assets_M")
+  ceo                           String
+  country                       String
+  headquartersCity             String   @map("HeadquartersCity")
+  headquartersState            String   @map("HeadquartersState")
+  website                       String
+  footnote                      String   @db.VarChar(1000)
+  marketCapUpdatedM            Float?   @map("MarketCap_Updated_M")
+  updated                       DateTime @map("Updated")
+
+  sector                        Sector   @relation(fields: [sectorId], references: [id])
+  industry                      Industry @relation(fields: [industryId], references: [id])
+  companyType                   CompanyType @relation(fields: [companyTypeId], references: [id])
+}
+
+model Sector {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique
+  companies Company[]
+}
+
+model Industry {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique
+  companies Company[]
+}
+
+model CompanyType {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique
+  companies Company[]
+}
